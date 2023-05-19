@@ -20,6 +20,9 @@ import CreatorDao from 'pages/Creator/CreatorDao'
 import CreatorToken from 'pages/Creator/CreatorToken'
 import AiChat from 'pages/AiChat'
 
+// NewSales
+import Sales from 'pages/Sales'
+
 // swap
 // import CreateSales from 'pages/CreateSales'
 // import SaleDetail from 'pages/CreateSales/Details'
@@ -169,6 +172,9 @@ export default function App() {
                   {/* <Route exact strict path={routes.PushList} component={PushList} /> */}
                   <Route exact strict path={routes.Profile} component={Profile} />
                   <Route exact strict path={routes._Profile} component={Profile} />
+
+                  <Route exact strict path={routes.CreateSales} component={Sales} />
+
                   {/* <Route exact strict path={routes.CreateSales} component={CreateSales} /> */}
                   {/* <Route exact strict path={routes.SaleDetails} component={SaleDetail} /> */}
                   {/* <Route exact strict path={routes.Home} component={Home} /> */}

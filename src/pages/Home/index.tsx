@@ -22,7 +22,6 @@ import { useHomeDaoList } from 'hooks/useBackedDaoServer'
 import { useDaoBaseInfo } from 'hooks/useDaoInfo'
 import { HomeListProp } from 'hooks/useBackedDaoServer'
 import { routes } from 'constants/routes'
-
 const ColSentence = styled(Box)(() => ({
   display: 'flex',
   justifyContent: 'space-between',
