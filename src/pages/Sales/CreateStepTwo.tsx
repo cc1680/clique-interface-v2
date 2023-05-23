@@ -17,7 +17,7 @@ import {
   TableHead,
   TableRow
 } from '@mui/material'
-import { ReactComponent as StepTwo } from 'assets/svg/steptwo.svg'
+
 import { ReactComponent as Timeicon } from 'assets/svg/timeicon.svg'
 import Input from 'components/Input'
 import SwitchBtn from 'components/Switch'
@@ -82,8 +82,12 @@ const VerticalBar = styled(Box)(() => ({
   height: '19.5px',
   border: '1px solid #D4D7E2'
 }))
+const JButton = styled(Button)(() => ({
+  width: '200px',
+  height: '40px'
+}))
 
-export default function CreateStepTwo() {
+export default function CreateStepTwo({ StepChange }: { StepChange: (Back: boolean) => void }) {
   const inputStyle = {
     height: '40px',
     backgroundColor: 'transparent',
@@ -104,19 +108,11 @@ export default function CreateStepTwo() {
   const SwitchChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSwitchState(event.target.checked)
   }
+  const LastStep = () => {
+    StepChange(false)
+  }
   return (
-    <Box
-      sx={{
-        maxWidth: '1440px',
-        padding: '55px 127px 0 123px'
-      }}
-    >
-      <Box sx={{ display: 'flex', width: '100%', justifyContent: 'space-between' }}>
-        <Typography sx={{ color: '#3F5170', width: '321px', fontFamily: 'Inter', fontWeight: 600, fontSize: 30 }}>
-          Create Discount Sales
-        </Typography>
-        <StepTwo />
-      </Box>
+    <>
       <Box sx={{ maxWidth: '866px' }}>
         <Row sx={{ mt: '40px' }}>
           <Box>
@@ -340,22 +336,22 @@ export default function CreateStepTwo() {
           <Tablee />
         </Box>
         <Row sx={{ mt: '30px', mb: '50px' }}>
-          <Button sx={{ width: '200px', height: '40px', border: '1px solid #0049C6' }}>BACK</Button>
-          <Button
+          <JButton sx={{ border: '1px solid #0049C6' }} onClick={LastStep}>
+            BACK
+          </JButton>
+          <JButton
             variant="contained"
             sx={{
               right: 0,
-              width: '200px',
-              height: '40px',
               background: ' #0049C6',
               color: '#FFFFFF'
             }}
           >
             Public
-          </Button>
+          </JButton>
         </Row>
       </Box>
-    </Box>
+    </>
   )
 }
 function SelectComponent({ width }: { width: number }) {

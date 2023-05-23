@@ -1,42 +1,68 @@
 import styled from '@emotion/styled'
 import { Box, Typography, Button } from '@mui/material'
-import { ReactComponent as StepOne } from 'assets/svg/stepone.svg'
+import { useState, ChangeEvent } from 'react'
+
 import Input from 'components/Input'
-import { useState } from 'react'
 
-const InputTitle = styled(Typography)`
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  color: #80829f;
-`
+const InputTitle = styled(Typography)(() => ({
+  fontFamily: 'Inter',
+  fontStyle: 'normal',
+  fontWeight: 500,
+  fontSize: '14px',
+  color: ' #80829f',
+  lineHeight: '16px',
+  marginBottom: '10px'
+}))
 
-export default function CreateStepOne() {
-  const [eventvalue] = useState('')
+function CreateStepOne({
+  onValueChange
+}: {
+  onValueChange: (StepOneData: { inputValue: string; TextareaValue: string }) => void
+}) {
+  const [inputValue, setInputValue] = useState('')
+  const InputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value)
+  }
+
+  const [TextareaValue, setTextareaValue] = useState('')
+  const TextareaChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setTextareaValue(event.target.value)
+  }
+  const NextStep = () => {
+    const StepOneValue = {
+      inputValue,
+      TextareaValue
+    }
+    onValueChange(StepOneValue)
+  }
+
+  const InputStyle = {
+    maxWidth: '866px',
+    height: '40px',
+    backgroundColor: 'transparent',
+    border: '1px solid #D4D7E2'
+  }
+  const TextareaStyle = {
+    maxWidth: '866px',
+    height: '303px',
+    backgroundColor: 'transparent',
+    paddingRight: '20px',
+    border: '1px solid #D4D7E2'
+  }
   return (
-    <Box
-      sx={{
-        maxWidth: '1440px',
-        padding: '55px 127px 0 123px'
-      }}
-    >
-      <Box sx={{ display: 'flex', width: '100%', justifyContent: 'space-between' }}>
-        <Typography sx={{ color: '#3F5170', width: '321px', fontFamily: 'Inter', fontWeight: 600, fontSize: 30 }}>
-          Create Discount Sales
-        </Typography>
-        <StepOne />
+    <>
+      <Box sx={{ mt: '40px' }}>
+        <InputTitle>Event title</InputTitle>
+        <Input value={inputValue} onChange={InputChange} style={InputStyle} />
       </Box>
-      <Box sx={{ pt: '40px' }}>
-        <InputTitle sx={{ mb: '10px' }}>Event title</InputTitle>
-        <Input value={eventvalue} maxWidth="866px" height="40px" />
-        <InputTitle sx={{ mt: '17px', mb: '10px' }}>About product</InputTitle>
-        <Input value={eventvalue} multiline rows={12} height="303px" maxWidth="866px" />
+      <Box sx={{ mt: '17px' }}>
+        <InputTitle>About product</InputTitle>
+        <Input value={TextareaValue} onChange={TextareaChange} style={TextareaStyle} rows={12} multiline />
       </Box>
-      <Box sx={{ mt: '30px', maxWidth: '866px', position: 'relative' }}>
-        {/* <Button sx={{ width: '200px', height: '40px', border: '1px solid #0049C6' }}>BACK</Button> */}
+      <Box sx={{ mt: '30px', position: 'relative' }}>
         <Button
           variant="contained"
+          onClick={NextStep}
           sx={{
             position: 'absolute',
             right: 0,
@@ -49,6 +75,8 @@ export default function CreateStepOne() {
           Next
         </Button>
       </Box>
-    </Box>
+    </>
   )
 }
+
+export default CreateStepOne
